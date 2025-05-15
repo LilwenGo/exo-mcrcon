@@ -1,0 +1,20 @@
+services:
+  api:
+    build: .
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./.env
+  server:
+    image: marctv/minecraft-papermc-server:1.21.4
+    container_name: "mcserver"
+    environment:
+      MEMORYSIZE: "1G"
+      PAPERMC_FLAGS: ""
+    volumes:
+      - ./mc-data:/data
+    ports:
+      - "25575:25575"
+      - "25565:25565"
+    stdin_open: true
+    tty: true
